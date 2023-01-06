@@ -1,0 +1,48 @@
+
+API: GET /api/v1/Authors
+ Test Case: response should be 200 OK
+ Expected Result: 200 OK
+ Actual Result: 200 OK
+ Status: Pass
+ ***************************************************
+ API: GET /api/v1/Authors
+ Test Case: Objects inside response contain, id, idBook, firstName, lastName
+ Expected Result: 200 OK
+ Actual Result: 200 OK
+ Status: Pass
+ *****************************************************************************
+  API: Post /api/v1/Authors
+ Test Case:Register a new valid Author successfully and response code "201 Created".
+ Expected Result: 200 OK
+ Actual Result: 200 OK
+ Status: Pass
+ *****************************************************************************
+  API: Post /api/v1/Authors
+ Test Case:firstname & lastname should be mandatory
+ Expected Result: 400
+ Actual Result: 200 OK
+ Status: fail
+ *****************************************************************************
+ API: Post /api/v1/Authors
+ Test Case:lastname should be mandatory
+ Expected Result: 400
+ Actual Result: 200 OK
+ Status: fail
+ *****************************************************************************
+ API: Post /api/v1/Authors
+ Test Case:Searching with valid idBook should return relative data in response body.
+ Expected Result: 200
+ Actual Result: 200 OK
+ Status: Pass
+ *****************************************************************************
+ PUT /api/v1/Authors/{id}
+ Test Case:Author's data is updated successfully.
+ Expected Result: 200
+ Actual Result: 200 OK
+ Status: Pass
+ *****************************************************************************
+ Get /api/v1/Authors/{id}
+ Test case : The author's data is changed in GET request.
+ Expected Result: 400
+ Actual Result: 200 OK
+ Status: fail

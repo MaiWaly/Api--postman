@@ -1,0 +1,412 @@
+{
+	"info": {
+		"_postman_id": "11563d21-bdec-422b-8d8f-610ed64dfc50",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23840783"
+	},
+	"item": [
+		{
+			"name": "GET /api/v1/Authors",
+			"item": [
+				{
+					"name": "Make sure the response is \"200 OK\"",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.log(pm.response.status)\r",
+									"console.log(pm.response.code)\r",
+									"pm.test(\"Make sure the response is 200 OK\",function()\r",
+									"    {\r",
+									"pm.expect(pm.response.code).to.equal(200)\r",
+									"\r",
+									"    }\r",
+									")"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/api/v1/Authors",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Objects inside response contain, id, idBook, firstName, lastName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var objectlength=pm.response.json().length\r",
+									"for (let i = 0; i < objectlength; i++){\r",
+									"    pm.test(\"Object \"+i + \" inside response contain, id, idBook, firstName, lastName\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"id\",\"idBook\",\"firstName\",\"lastName\");\r",
+									" \r",
+									"});}\r",
+									"pm.test(\"Make sure the response is 200 OK\",function()\r",
+									"    {\r",
+									"pm.expect(pm.response.code).to.equal(200);\r",
+									"    })"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/api/v1/Authors",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Authors"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test Case Example 1",
+			"item": [
+				{
+					"name": "Register a new valid Author successfully and response code \"201 Created\"",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"console.log(pm.response.text())\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 202]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"idBook\": 0,\r\n  \"firstName\": \"Mai\",\r\n  \"lastName\": \"Amin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/v1/Authors",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "firstname  should be mandatory",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.log(pm.response.text())\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    \r",
+									"    pm.expect(pm.response.code).to.eql(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"idBook\": 0,\r\n  \"lastName\": \"Amin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/v1/Authors",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "lastname should be mandatory Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.log(pm.response.text())\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    \r",
+									"    pm.expect(pm.response.code).to.be.equal(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"idBook\": 0,\r\n  \"firstName\": \"Mai\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/v1/Authors",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Authors"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test Case Example 2",
+			"item": [
+				{
+					"name": "Searching with valid idBook should return relative data in response body",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var objectlength=pm.response.json().length\r",
+									"console.log( \"current Id is \"+ pm.environment.get(\"currentId\"));\r",
+									"var idbook=parseInt(pm.environment.get(\"currentId\"));\r",
+									"for (let i = 0; i < objectlength; i++) {\r",
+									"\r",
+									"pm.test(\"Searching with valid idBook should return relative data in response body\",function()\r",
+									"{\r",
+									"   \r",
+									"console.log(pm.response.json()[i].idBook)\r",
+									"pm.expect(pm.response.json()[i].idBook).to.equal(idbook);\r",
+									"\r",
+									"})\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/v1/Authors/authors/books/{{currentId}}",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Authors",
+								"authors",
+								"books",
+								"{{currentId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test Case Example 3",
+			"item": [
+				{
+					"name": "Author's data is updated successfully.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Author's data is updated successfully.\",function(){\r",
+									"pm.expect(pm.response.json().firstName).to.equal(\"Dodo\");\r",
+									"console.log(pm.response.json().firstName);\r",
+									"console.log(pm.response.json().lastName);\r",
+									"pm.expect(pm.response.json().lastName).to.equal(\"Amin\");\r",
+									"\r",
+									"\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 5,\r\n  \"idBook\": 0,\r\n  \"firstName\": \"Dodo\",\r\n  \"lastName\": \"Amin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/v1/Authors/5",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Authors",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "The author's data is changed in GET request.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"The author's data is changed in GET request.\",function(){\r",
+									"console.log(pm.response.json().firstName)\r",
+									"console.log(pm.response.json().lastName)\r",
+									"pm.expect(\"Dodo\").to.equal(pm.response.json().firstName)   \r",
+									"})\r",
+									"pm.test(\"The author's data is changed in GET request.\",function(){\r",
+									"\r",
+									"pm.expect(\"Amin\").to.equal(pm.response.json().lastName)    \r",
+									"\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/api/v1/Authors/5",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Authors",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "idbook",
+			"value": "1"
+		},
+		{
+			"key": "idbook",
+			"value": ""
+		},
+		{
+			"key": "username",
+			"value": ""
+		},
+		{
+			"key": "usernames",
+			"value": ""
+		},
+		{
+			"key": "idBook",
+			"value": ""
+		}
+	]
+}
